@@ -1,0 +1,27 @@
+[
+  {
+    "tactic_state": "\u22a2 2 = 2",
+    "prefix": "",
+    "context": "example : 2 = 2 := by "
+  },
+  {
+    "tactic_state": "\u22a2 a = 4",
+    "prefix": "",
+    "context": "example {a b:ℝ  } (h1:a+b=5)(h2:b=1): a=4 := by"
+  },
+  {
+    "tactic_state": "\u22a2 b = 4",
+    "prefix": "",
+    "context": "example {a b:ℤ }(h1: a + b =3)(h2:a=-1):b=4:= by"
+  },
+  {
+    "tactic_state": "\u22a2 ∀ (x q : ℕ), 37 * x + q = 37 * x + q",
+    "prefix": "",
+    "context": "example (x q : ℕ) : 37 * x + q = 37 * x + q := by"
+  },
+  {
+    "tactic_state": "\u22a2 ⊢ ∀ (n : ℕ), Nat.succ n = n + 1",
+    "prefix": "",
+    "context": "theorem succ_eq_add_one n : Nat.succ (n) = n + 1 := by"
+  }
+]

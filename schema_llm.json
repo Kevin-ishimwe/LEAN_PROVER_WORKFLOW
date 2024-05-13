@@ -1,0 +1,38 @@
+[
+  {
+    "tactic_state": "⊢ 2 = 2",
+    "prefix": "",
+    "context": "\n example : 2 = 2 := by"
+  },
+  {
+    "tactic_state": "a b: ℝ\nh1: a + b = 5\nh2: b = 1\n⊢ a = 4",
+    "prefix": "",
+    "context": "\n example {a b:ℝ  } (h1:a+b=5)(h2:b=1): a=4 := by"
+  },
+  {
+    "tactic_state": "a b: ℤ \n h1: a + b = 3\nh2: a = -1\n⊢ b = 4",
+    "prefix": "",
+    "context": "\n example {a b:ℤ }(h1: a + b =3)(h2:a=-1):b=4:= by"
+  },
+  {
+    "tactic_state": "x q: ℕ \n ⊢  37 * x + q = 37 * x + q",
+    "prefix": "",
+    "context": "\n example (x q : ℕ) : 37 * x + q = 37 * x + q := by"
+  },
+  {
+    "tactic_state": "n: ℕ \n ⊢ Nat.succ n = n + 1",
+    "prefix": "",
+    "context": "\n theorem succ_eq_add_one n : Nat.succ (n) = n + 1 := by"
+  },
+  {
+    "goals": [
+      "a b c ℝ",
+      "h1:sin = a/c",
+      "h2:cos = b/c",
+      "h3:sin^2 + cos^2 = 1",
+      "⊢ c^2 = a^2 + b^2"
+    ],
+    "possible_tactics": ["rewrite tactic", "exact tactic"],
+    "theorem": "theorem pythagorean_triple {a b c : ℝ} (h1 : sin = a/c) (h2: cos = b/c) (h3: sin^2 + cos^2 = 1): c^2 = a^2 + b^2 := by [tactic]"
+  }
+]
