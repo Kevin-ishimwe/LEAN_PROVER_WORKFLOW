@@ -1,6 +1,7 @@
 import Mathlib
 
 
+theorem square_expansion (a b : ℕ ):(a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2:= by ring
 --test case
 theorem gas_law_eq {p1 v1 p2 v2 n1 n2 r t1 t2 : ℝ}
 (h1 : p1 * v1 = n1 * r * t1)
@@ -38,14 +39,13 @@ p1 * v1 = n1 * r * t1 := by rw[h1]
 
 -- human generated
 example {c:ℝ }:c*c=c^2:=by simp [sq]
-example {a b:ℝ }:(a+b)^2=a^2+2*a*b+b^2:=by
+example {a b:ℕ  }:(a+b)^2=a^2+2*a*b+b^2:=by
 calc
 (a+b)^2=(a+b)*(a+b):=by simp [sq]
 _=(a*a)+a*b+b*a+(b*b):=by ring
 _=(a^2)+a*b+b*a+(b^2):=by simp [sq]
 _=(a^2)+2*a*b+(b^2):=by ring
 def divme (c:ℝ ):Prop:=c/c=1
-
 --test case
 theorem pythagorean_triple {a b c : ℝ}
 (h1 : sin =a/c)
@@ -127,11 +127,11 @@ calc
   _ = a^2 + 2*a*b + b^2 := by rcases;ring_nf;simp[sq]
 
 --test case
-theorem squarexpansionw (a b : ℕ) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by ring!
+theorem squarexpansionw (a b : Nat) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by ring
 
 --test case
+variable {ke m v p :ℝ }
 theorem ke_eq_psq_over_2m
-{ke m v p :ℝ }
 (h1 : ke = 1 / 2 * m * v^2)
 (h2: p = m * v)
 (h3: m / m = 1): ke = p^2 / (2 * m) :=
@@ -146,3 +146,48 @@ calc
 
 --test case
 theorem twelve_equals_twelve : 12 = 12 := by norm_num
+
+theorem test: 3*2=6 := by simp
+--test case
+theorem ideal_gas_law_equal_conditions (p1 v1 n1 r t1 p2 v2 n2 t2: ℝ) (h1: p1 * v1 = n1 * r * t1) (h2: p2 * v2 = n2 * r * t2) (h3: t1 = t2) (h4: n1 = n2) : p1 * v1 = p2 * v2 := by rw [h1, h4, h3, h2]
+
+--test case
+theorem show_128_eq_128 : 128 = 128 := by rfl
+
+--test case
+variable (p1 v1 n1 r t1 p2 v2 n2 t2: Real)
+theorem ideal_gas_law_equivalence (h1 : p1 * v1 = n1 * r * t1) (h2 : p2 * v2 = n2 * r * t2) (h3 : t1 = t2) (h4 : n1 = n2) : p1 * v1 = p2 * v2 :=
+calc
+  p1 * v1 = n1 * r * t1 := by rw[h1]
+  _ = n2 * r * t1 := by rw[h4]
+  _ = n2 * r * t2 := by rw[h3]
+  _ = p2 * v2 := by rw[h2]
+
+--test case
+variable (p1 v1 p2 v2 n1 n2 r t1 t2 : ℝ)
+theorem ideal_gvas_law (h1 : p1 * v1 = n1 * r * t1) (h2 : p2 * v2 = n2 * r * t2) (h3 : t1 = t2) (h4 : n1 = n2) : p1 * v1 = p2 * v2 :=
+calc
+  p1 * v1 = n1 * r * t1 := by rw[h1]
+  _ = n2 * r * t1 := by rw[h4]
+  _ = n2 * r * t2 := by rw[h3]
+  _ = p2 * v2 := by rw[h2]
+
+
+--test case
+theorem seventy_five_equals : 75 = 75 := by rfl
+--test case
+theorem equal_pv (h1: p1 * v1 = n1 * r * t1) (h2: p2 * v2 = n2 * r * t2) (h3: t1 = t2) (h4: n1 = n2) : p1 * v1 = p2 * v2 :=
+    by rw [h1, h4, h3, h2]
+--test case
+theorem show_b_two (a b : Nat) (h1 : a + b = 12) (h2 : a = 10) : b = 2 := by rw [h2] at h1; linarith
+--test case
+theorem square_of_msum (a b : Int) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 :=
+by calc
+      (a + b) ^ 2= (a + b) * (a + b) := by ring
+      _ = a * (a + b) + b * (a + b) := by ring
+      _ = a * a + a * b + b * a + b * b := by ring
+      _ = a^2 + a * b + a * b + b^2 := by ring
+      _ = a^2 + 2 * a * b + b^2 := by ring
+
+--test case
+theorem trivial_equality : 3 = 3 := by rfl 

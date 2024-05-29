@@ -7,15 +7,11 @@ PORT = os.environ.get('LLMSTEP_PORT', 6000)
 SERVER = os.environ.get('LLMSTEP_SERVER', 'DEFAULT')
 
 imports_lean="""\nimport Mathlib\n"""
-
 def suggest(host, tactic_state, prefix, context):
     print("finding suggestion",tactic_state,prefix,context)
     data = {'tactic_state': tactic_state, 'prefix': prefix, 'context': imports_lean+context}
     response = json.loads(requests.post(host, json=data).content)
-    print(response['suggestions'])
     return response['suggestions']
-
-
 
 def writeLeanFile(content,suggestion):
     leanfile=open("./benchmarking/tester_lean/test.lean","a")
