@@ -1,7 +1,7 @@
 import Mathlib
 
+theorem square_expansion (a b : ℕ ):(a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by ring
 
-theorem square_expansion (a b : ℕ ):(a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2:= by ring
 --test case
 theorem gas_law_eq {p1 v1 p2 v2 n1 n2 r t1 t2 : ℝ}
 (h1 : p1 * v1 = n1 * r * t1)
@@ -37,14 +37,17 @@ p1 * v1 = n1 * r * t1 := by rw[h1]
   _=n2 * r * t2 := by rw [h4, h3]  _=p2 * v2 := by rw [←h2]
 
 
--- human generated
+--test case 
 example {c:ℝ }:c*c=c^2:=by simp [sq]
+
 example {a b:ℕ  }:(a+b)^2=a^2+2*a*b+b^2:=by
 calc
 (a+b)^2=(a+b)*(a+b):=by simp [sq]
 _=(a*a)+a*b+b*a+(b*b):=by ring
 _=(a^2)+a*b+b*a+(b^2):=by simp [sq]
 _=(a^2)+2*a*b+(b^2):=by ring
+
+
 def divme (c:ℝ ):Prop:=c/c=1
 --test case
 theorem pythagorean_triple {a b c : ℝ}
@@ -190,4 +193,4 @@ by calc
       _ = a^2 + 2 * a * b + b^2 := by ring
 
 --test case
-theorem trivial_equality : 3 = 3 := by rfl 
+theorem trivial_equality : 3 = 3 := by rfl

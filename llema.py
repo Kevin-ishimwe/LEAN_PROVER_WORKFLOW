@@ -117,16 +117,19 @@ def llmBody (theorem,suggestions):
   response_gpt= json.loads(completion.choices[0].message.content)
   writeLeanFile(response_gpt["proof"],"")
 
-def debug ():
+def debugLean ():
   #this tool will be used to iterate on the lean feed back 
   # lake env lean ./benchmarking/tester_lean/min.lean
-  pass
+
+  print("debugging ")
+  cmd = ["lake","env","lean", "./benchmarking/tester_lean/min.lean"]
+  result = subprocess.run(cmd,capture_output=True, text=True).stdout.strip()
+  print(result)
 
 
 if __name__=="__main__":
   try:
-      prompt=input("prompt:")
-      gpt4_call_write_theorem (prompt)
+      debugLean()
   except Exception as e:
     print("Error:",e)
 
