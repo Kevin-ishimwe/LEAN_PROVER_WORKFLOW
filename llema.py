@@ -13,7 +13,7 @@ client = OpenAI(
     api_key=API_KEY
   )
 #this function is supposed to write the initial theorem part and the proof goals
-def gpt4_call_write_theorem  (prompt):
+def gpt4_call_write_theorem (prompt):
   print("---------api call (gpt4)------------")
   #prompt for the initial theorem
   completion = client.chat.completions.create(
@@ -109,7 +109,6 @@ def llmBody (theorem,suggestions):
       instruction:with variables defined ,write the full/intire theorem using mathematical logic.
       tactic_suggestions: ${suggestions[0]} not all tactics are relevant choose one you think will work
       tactics are applied as with  `:=`followed with ` by tactic`
-
       """
     }
   ])
@@ -117,20 +116,27 @@ def llmBody (theorem,suggestions):
   response_gpt= json.loads(completion.choices[0].message.content)
   writeLeanFile(response_gpt["proof"],"")
 
+def debugLlm ():
+  pass
+
+
 def debugLean ():
   #this tool will be used to iterate on the lean feed back 
   # lake env lean ./benchmarking/tester_lean/min.lean
-
   print("debugging ")
   cmd = ["lake","env","lean", "./benchmarking/tester_lean/min.lean"]
-  result = subprocess.run(cmd,capture_output=True, text=True).stdout.strip()
-  print(result)
+  error = subprocess.run(cmd,capture_output=True, text=True).stdout.strip().split("Try this:")[0].replace("\n","")
+  if (error.split("error")):
+    print()
+    debugLlm()
+  else :
+    print("proof compiled correctly")
 
 
 if __name__=="__main__":
   try:
-      debugLean()
+      prompt=input("prompt: ")
+      gpt4_call_write_theorem (prompt)
   except Exception as e:
     print("Error:",e)
-
 

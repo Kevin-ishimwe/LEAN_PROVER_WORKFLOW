@@ -14,7 +14,7 @@ def suggest(host, tactic_state, prefix, context):
     return response['suggestions']
 
 def writeLeanFile(content,suggestion):
-    leanfile=open("./benchmarking/tester_lean/test.lean","a")
+    leanfile=open("./benchmarking/tester_lean/min.lean","a")
     leanfile.write("\n--test case\n"+content +" "+suggestion)
 
 def automated_testing():

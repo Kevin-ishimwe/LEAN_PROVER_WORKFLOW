@@ -194,3 +194,6 @@ by calc
 
 --test case
 theorem trivial_equality : 3 = 3 := by rfl
+
+--test case
+theorem four_equals_four : 4 = 4 := by rfl 
