@@ -12,6 +12,7 @@ API_KEY=os.environ["OPEN_AI_KEY"]
 client = OpenAI(
     api_key=API_KEY
   )
+
 #this function is supposed to write the initial theorem part and the proof goals
 def gpt4_call_write_theorem (prompt):
   print("---------api call (gpt4)------------")
@@ -49,6 +50,7 @@ def gpt4_call_write_theorem (prompt):
   )
   txt=completion.choices[0].message.content.replace("json","").replace("\n","")
   response_gpt=json.loads(json.loads(json.dumps(txt)))
+  print(response_gpt)
   runSuggestLLM(response_gpt,prompt)
   return response_gpt
 
@@ -107,8 +109,7 @@ def llmBody (theorem,suggestions):
       ---------------------------------------------
       use step by step mathematical logic to,${prompt}
       instruction:with variables defined ,write the full/intire theorem using mathematical logic.
-      tactic_suggestions: ${suggestions[0]} not all tactics are relevant choose one you think will work
-      tactics are applied as with  `:=`followed with ` by tactic`
+      tactic_suggestions: ${suggestions[0]} tactic suggestion might be wrong so analyse and decide how to approach
       """
     }
   ])
@@ -117,6 +118,31 @@ def llmBody (theorem,suggestions):
   writeLeanFile(response_gpt["proof"],"")
 
 def debugLlm ():
+  completion = client.chat.completions.create(
+    temperature=1,
+  model="gpt-4-0125-preview",
+  messages=[
+        {
+          "role": "system",
+          "content": """
+                    
+                  """
+    },
+    {
+    "role": "user",
+      "content":f"""
+      given the incomplete formal proof in lean 4: 
+      ---------------------------------------------
+      ${theorem}
+      ---------------------------------------------
+      use step by step mathematical logic to,${prompt}
+      instruction:with variables defined ,write the full/intire theorem using mathematical logic.
+      tactic_suggestions: ${suggestions[0]} not all tactics are relevant choose one you think will work
+      tactics are applied as with  `:=`followed with ` by tactic`
+      """
+    }
+  ])
+  print(completion.choices[0].message.content)
   pass
 
 

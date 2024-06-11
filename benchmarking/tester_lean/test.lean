@@ -1,4 +1,23 @@
 import Mathlib
+/- Copyright (c) Heather Macbeth, 2022.  All rights reserved. -/
+
+
+example :2 ≤ 20 := by linarith
+-- delete right tactic portion to prove left side or delete left tactic portion to prove right side
+example {d1 s1 d2 s2 x1 x2 : ℝ} (h1 : d1 = 5) (h2 : s1 = 50) (h3 : d2 = 1) (h4 : s2 = 30)
+(h5 : x1 = d1/s1) (h6 : x2 = d2/s2): x1 ≤ 0.3333 ∨  x2 ≤ 0.3333 := by
+  left
+  calc
+    x1 = d1/s1 := by rw[h5]
+    _ = 5/s1 := by rw [h1]
+    _ = 5/50 := by rw [h2]
+    _ ≤ 0.3333 := by norm_num
+
+
+
+
+
+
 
 theorem square_expansion (a b : ℕ ):(a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by ring
 
@@ -37,7 +56,7 @@ p1 * v1 = n1 * r * t1 := by rw[h1]
   _=n2 * r * t2 := by rw [h4, h3]  _=p2 * v2 := by rw [←h2]
 
 
---test case 
+--test case
 example {c:ℝ }:c*c=c^2:=by simp [sq]
 
 example {a b:ℕ  }:(a+b)^2=a^2+2*a*b+b^2:=by
@@ -106,7 +125,7 @@ calc
 
 --test case
 theorem four_eq_four : 4 = 4 := by norm_num
-theorem sq_identity {a b : ℝ} : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 :=
+theorem sq_identity{a b  : ℝ} : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 :=
 calc
 (a + b) ^ 2 = (a + b) * (a + b) := by simp[sq]
 _ = a * (a + b) + b * (a + b) := by ring
@@ -115,13 +134,8 @@ _ = a^2 + a * b + a * b + b^2 := by simp[sq]; ring
 _ = a^2 + 2 * a * b + b^2 := by ring
 
 theorem square_of_sum
-(a b : ℝ) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 :=
-calc
-(a + b) ^ 2 = (a + b) * (a + b) := by simp [sq]
-_ = a * (a + b) + b * (a + b) := by ring
-_ = (a * a + a * b) + (b * a + b * b) := by rcases; ring
-_ = a^2 + a*b + b*a + b^2 := by simp [sq];ring;
-_ = a^2 + 2*a*b + b^2 := by ring
+(a b : Int) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 :=
+by ring
 
 --test case
 theorem square_of_sums (a b : ℝ) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 :=
@@ -196,4 +210,4 @@ by calc
 theorem trivial_equality : 3 = 3 := by rfl
 
 --test case
-theorem four_equals_four : 4 = 4 := by rfl 
+theorem four_equals_four : 4 = 4 := by rfl
