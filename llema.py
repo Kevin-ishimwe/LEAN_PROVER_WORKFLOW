@@ -125,7 +125,6 @@ def debugLlm ():
         {
           "role": "system",
           "content": """
-                    
                   """
     },
     {
@@ -153,16 +152,17 @@ def debugLean ():
   cmd = ["lake","env","lean", "./benchmarking/tester_lean/min.lean"]
   error = subprocess.run(cmd,capture_output=True, text=True).stdout.strip().split("Try this:")[0].replace("\n","")
   if (error.split("error")):
-    print()
-    debugLlm()
+    print(error)
+    # debugLlm()
   else :
     print("proof compiled correctly")
 
 
 if __name__=="__main__":
   try:
-      prompt=input("prompt: ")
-      gpt4_call_write_theorem (prompt)
+      # prompt=input("prompt: ")
+      # gpt4_call_write_theorem (prompt)
+      debugLean()
   except Exception as e:
     print("Error:",e)
 

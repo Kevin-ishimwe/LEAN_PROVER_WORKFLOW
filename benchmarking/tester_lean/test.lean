@@ -1,6 +1,6 @@
 import Mathlib
 /- Copyright (c) Heather Macbeth, 2022.  All rights reserved. -/
-
+/- please check semantics -/
 
 example :2 ≤ 20 := by linarith
 -- delete right tactic portion to prove left side or delete left tactic portion to prove right side
